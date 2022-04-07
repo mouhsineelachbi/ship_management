@@ -5,6 +5,19 @@ using ship_management.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Cors policy name
+var  AllowedSpecificOrigins = "_shipAllowPolicy";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllowedSpecificOrigins,
+                      policy  =>
+                      {
+                          policy.WithOrigins("http://localhost:3000").AllowAnyMethod();
+                      });
+});
+
+
 // Register Db context
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data source=ship.db")); //.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
@@ -25,6 +38,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(AllowedSpecificOrigins);
 
 app.UseHttpsRedirection();
 
