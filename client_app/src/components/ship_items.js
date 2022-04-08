@@ -65,6 +65,7 @@ const ShipItems = () => {
   const [globalFilter, setGlobalFilter] = useState(null);
 
   const toast = useRef(null);
+
   const dt = useRef(null);
 
   const shipCodeValidation = /^[a-zA-Z]{4}-[0-9]{4}-[a-zA-Z]{1}[0-9]{1}$/;
@@ -114,19 +115,28 @@ const ShipItems = () => {
           life: 3000,
         });
       } else {
-        ship.id = 22;
         _ships.push(_ship);
-        toast.current.show({
-          severity: "success",
-          summary: "Successful",
-          detail: "Ship Created",
-          life: 3000,
-        });
+        // Add ship using ship_service
+        const { id, ..._shipWihoutId } = _ship;
+        console.log(_shipWihoutId);
+        ShipService.addShip(_shipWihoutId)
+          .then((data) => {
+            if (data.data.value != null) {
+              toast.current.show({
+                severity: "success",
+                summary: "Successful",
+                detail: "Ship Created",
+                life: 3000,
+              });
+              setShips(_ships);
+              setShipDialog(false);
+              setShip(emptyShip);
+            }
+          })
+          .catch((e)=>{
+            showError("Ship informations are not valid");
+          });
       }
-
-      setShips(_ships);
-      setShipDialog(false);
-      setShip(emptyShip);
     }
   };
 
@@ -152,6 +162,10 @@ const ShipItems = () => {
       life: 3000,
     });
   };
+
+  const showError = (message) => {
+    toast.current.show({severity: 'error', summary: 'Error Message', detail: message});
+}
 
   // Find the index of the ship by Its Id in the
   // ship list
