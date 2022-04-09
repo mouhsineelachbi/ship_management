@@ -9,6 +9,10 @@ export const ShipService = {
         return instance.post("Ship", ship);
     },
 
+    updateShip: function(ship) {
+        return instance.put(`Ship/${ship.id}`, ship)
+    },
+
     deleteShip: function(shipId) {
         return instance.delete(`Ship/${shipId}`)
     }

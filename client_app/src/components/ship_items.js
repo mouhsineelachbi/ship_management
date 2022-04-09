@@ -106,14 +106,18 @@ const ShipItems = () => {
       let _ship = { ...ship };
       if (ship.id) {
         const index = findIndexById(ship.id);
-        
-        _ships[index] = _ship;
-        toast.current.show({
-          severity: "success",
-          summary: "Successful",
-          detail: "Ship Updated",
-          life: 3000,
-        });
+        ShipService.updateShip(ship).then((data) => {
+          _ships[index] = _ship;
+          
+          toast.current.show({
+            severity: "success",
+            summary: "Successful",
+            detail: "Ship Updated",
+            life: 3000,
+          });
+          setShips(_ships);
+          setShipDialog(false);
+        }).catch(e => showError("Cannot update this ship informations"));
       } else {
         _ships.push(_ship);
         // Add ship using ship_service

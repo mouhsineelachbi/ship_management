@@ -52,7 +52,7 @@ namespace ship_management.Controllers
         }
 
         // Update one Ship by id
-        [HttpPut]
+        [HttpPut("{id}")]
         public ActionResult<Ship> UpdateShip(int id, [FromBody] Ship ship)
         {
             if (ship == null)
