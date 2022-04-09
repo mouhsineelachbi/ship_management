@@ -86,7 +86,7 @@ namespace ship_management.Controllers
             return NoContent();
         }
 
-        [HttpDelete("/deleteShips")]
+        [HttpDelete("deleteShips")]
         public ActionResult<Ship> DeleteShips([FromBody] Ship[] ships)
         {
             if(ships == null)

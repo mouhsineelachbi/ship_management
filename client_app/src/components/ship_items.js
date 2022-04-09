@@ -233,6 +233,7 @@ const ShipItems = () => {
 
   const deleteSelectedShips = () => {
     let _ships = ships.filter((val) => !selectedShips.includes(val));
+    ShipService.deleteShips(selectedShips).then(data=> console.log(data));
     setShips(_ships);
     setDeleteShipsDialog(false);
     setSelectedShips(null);
