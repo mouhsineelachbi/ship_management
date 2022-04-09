@@ -106,25 +106,32 @@ const ShipItems = () => {
       let _ship = { ...ship };
       if (ship.id) {
         const index = findIndexById(ship.id);
-        ShipService.updateShip(ship).then((data) => {
-          _ships[index] = _ship;
-          
-          toast.current.show({
-            severity: "success",
-            summary: "Successful",
-            detail: "Ship Updated",
-            life: 3000,
-          });
-          setShips(_ships);
-          setShipDialog(false);
-        }).catch(e => showError("Cannot update this ship informations"));
+
+        ShipService.updateShip(ship)
+          .then((data) => {
+            _ships[index] = _ship;
+
+            toast.current.show({
+              severity: "success",
+              summary: "Successful",
+              detail: "Ship Updated",
+              life: 3000,
+            });
+
+            setShips(_ships);
+            setShipDialog(false);
+            setShip(emptyShip);
+          })
+          .catch((e) => showError("Cannot update this ship informations"));
       } else {
-        _ships.push(_ship);
         // Add ship using ship_service
         const { id, ..._shipWihoutId } = _ship;
         ShipService.addShip(_shipWihoutId)
           .then((data) => {
             if (data.data.value != null) {
+              console.log(data.data.value);
+              _ship.id = data.data.value.id;
+              _ships.push(_ship);
               toast.current.show({
                 severity: "success",
                 summary: "Successful",
@@ -233,7 +240,7 @@ const ShipItems = () => {
 
   const deleteSelectedShips = () => {
     let _ships = ships.filter((val) => !selectedShips.includes(val));
-    ShipService.deleteShips(selectedShips).then(data=> console.log(data));
+    ShipService.deleteShips(selectedShips).then((data) => console.log(data));
     setShips(_ships);
     setDeleteShipsDialog(false);
     setSelectedShips(null);
