@@ -106,7 +106,7 @@ const ShipItems = () => {
       let _ship = { ...ship };
       if (ship.id) {
         const index = findIndexById(ship.id);
-
+        
         _ships[index] = _ship;
         toast.current.show({
           severity: "success",
@@ -118,7 +118,6 @@ const ShipItems = () => {
         _ships.push(_ship);
         // Add ship using ship_service
         const { id, ..._shipWihoutId } = _ship;
-        console.log(_shipWihoutId);
         ShipService.addShip(_shipWihoutId)
           .then((data) => {
             if (data.data.value != null) {
@@ -133,7 +132,7 @@ const ShipItems = () => {
               setShip(emptyShip);
             }
           })
-          .catch((e)=>{
+          .catch((e) => {
             showError("Ship informations are not valid");
           });
       }
@@ -152,20 +151,28 @@ const ShipItems = () => {
 
   const deleteShip = () => {
     let _ships = ships.filter((val) => val.id !== ship.id);
-    setShips(_ships);
-    setDeleteShipDialog(false);
-    setShip(emptyShip);
-    toast.current.show({
-      severity: "success",
-      summary: "Successful",
-      detail: "Ship Deleted",
-      life: 3000,
-    });
+    ShipService.deleteShip(ship.id)
+      .then((data) => {
+        toast.current.show({
+          severity: "success",
+          summary: "Successful",
+          detail: "Ship Deleted",
+          life: 3000,
+        });
+        setShips(_ships);
+        setDeleteShipDialog(false);
+        setShip(emptyShip);
+      })
+      .catch((e) => showError("Cannot delete this instance of ship"));
   };
 
   const showError = (message) => {
-    toast.current.show({severity: 'error', summary: 'Error Message', detail: message});
-}
+    toast.current.show({
+      severity: "error",
+      summary: "Error Message",
+      detail: message,
+    });
+  };
 
   // Find the index of the ship by Its Id in the
   // ship list
@@ -177,7 +184,6 @@ const ShipItems = () => {
         break;
       }
     }
-
     return index;
   };
 

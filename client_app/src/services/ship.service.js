@@ -7,5 +7,9 @@ export const ShipService = {
 
     addShip: function(ship) {
         return instance.post("Ship", ship);
+    },
+
+    deleteShip: function(shipId) {
+        return instance.delete(`Ship/${shipId}`)
     }
 }
