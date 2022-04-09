@@ -85,5 +85,16 @@ namespace ship_management.Controllers
             _shipRepository.DeleteShip(dbShip);
             return NoContent();
         }
+
+        [HttpDelete("/deleteShips")]
+        public ActionResult<Ship> DeleteShips([FromBody] Ship[] ships)
+        {
+            if(ships == null)
+            {
+                return BadRequest("Ships object is null");
+            }
+            _shipRepository.DeleteShips(ships);
+            return NoContent();
+        }
     }
 }

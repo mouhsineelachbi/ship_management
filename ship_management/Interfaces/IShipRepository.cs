@@ -10,5 +10,6 @@ namespace ship_management.Interfaces
         void CreateShip(Ship ship);
         void UpdateShip(Ship ship);
         void DeleteShip(Ship ship);
+        void DeleteShips(Ship[] ships);
     }
 }

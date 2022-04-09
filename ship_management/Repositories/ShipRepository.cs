@@ -36,5 +36,10 @@ namespace ship_management.Repositories
         {
             Update(ship);
         }
+
+        public void DeleteShips(Ship[] ships)
+        {
+            DeleteMultiple(ships);
+        }
     }
 }

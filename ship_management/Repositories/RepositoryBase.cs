@@ -39,5 +39,14 @@ namespace ship_management.Repositories
             this.ctx.Set<T>().Update(entity);
             this.ctx.SaveChanges();
         }
+
+        public void DeleteMultiple(T[] entities)
+        {
+            foreach (var entity in entities)
+            {
+                this.ctx.Set<T>().Remove(entity);
+            }
+            this.ctx.SaveChanges();
+        }
     }
 }
