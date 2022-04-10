@@ -1,5 +1,5 @@
 import './App.css';
-import ShipItems from './components/ship_items';
+import ShipItems from './components/ship_items/ship.items';
 
 function App() {
   return (

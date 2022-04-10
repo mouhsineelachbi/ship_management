@@ -9,9 +9,7 @@ import { Toolbar } from "primereact/toolbar";
 import { InputNumber } from "primereact/inputnumber";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
-import { useSelector, useDispatch } from "react-redux";
-import "./shipItems.css";
-import { fetchShipsFailure, fetchShipsRequest, fetchShipsSucess } from "../../actions/shipActions";
+import "./ship.items.css";
 
 const ShipItems = () => {
   let emptyShip = {
@@ -21,8 +19,6 @@ const ShipItems = () => {
     width: 0,
     code: null,
   };
-
-  const dispatch = useDispatch();
 
   const leftToolbarTemplate = () => {
     return (
@@ -77,12 +73,12 @@ const ShipItems = () => {
   const [codeInvalid, setCodeInvalid] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchShipsRequest());
     ShipService.getShips().then((data) => {
       setShips(data.data);
-      dispatch(fetchShipsSucess(data.data));
       console.table(data.data);
-    }).catch(e => dispatch(fetchShipsFailure(e.message)));
+    }).catch(e => 
+      console.log(e)
+    );
   }, []);
 
   const openNew = () => {
