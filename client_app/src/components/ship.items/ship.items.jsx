@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { classNames } from "primereact/utils";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { ShipService } from "../../services/ship.service";
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { Toolbar } from "primereact/toolbar";
@@ -13,7 +12,6 @@ import "./ship.items.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addShip,
-  getAllShips,
   updateShip,
   deleteShip,
   deleteShips,
@@ -315,7 +313,7 @@ const ShipItems = () => {
   );
 
   return (
-    <div className="datatable-crud-demo">
+    <div className="datatable-crud">
       <Toast ref={toast} />
 
       <div className="card">
