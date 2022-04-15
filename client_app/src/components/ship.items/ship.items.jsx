@@ -422,7 +422,7 @@ const ShipItems = () => {
               onValueChange={(e) => onInputNumberChange(e, "width")}
               className={classNames({ "p-invalid": submitted && !ship.width })}
             />
-            {submitted && !ship.width && codeInvalid && (
+            {submitted && !ship.width && (
               <small className="p-error">Width is required.</small>
             )}
           </div>
