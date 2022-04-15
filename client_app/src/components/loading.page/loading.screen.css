@@ -1,0 +1,4 @@
+.loading-screen {
+    max-height: 100vh;
+    display: flex;
+}
