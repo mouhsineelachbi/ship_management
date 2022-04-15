@@ -10,6 +10,14 @@ import { InputNumber } from "primereact/inputnumber";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import "./ship.items.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addShip,
+  getAllShips,
+  updateShip,
+  deleteShip,
+  deleteShips,
+} from "../../feature/ship/ship.slice";
 
 const ShipItems = () => {
   let emptyShip = {
@@ -39,16 +47,7 @@ const ShipItems = () => {
     );
   };
 
-  // const rightToolbarTemplate = () => {
-  //     return (
-  //         <React.Fragment>
-  //             <FileUpload mode="basic" name="demo[]" auto url="https://primefaces.org/primereact/showcase/upload.php" accept=".csv" chooseLabel="Import" className="mr-2 inline-block"/>
-  //             <Button label="Export" icon="pi pi-upload" className="p-button-help" />
-  //         </React.Fragment>
-  //     )
-  // }
-
-  const [ships, setShips] = useState(null);
+  const [shipss, setShipss] = useState(null);
 
   const [shipDialog, setShipDialog] = useState(false);
 
@@ -72,14 +71,104 @@ const ShipItems = () => {
 
   const [codeInvalid, setCodeInvalid] = useState(false);
 
-  useEffect(() => {
-    ShipService.getShips().then((data) => {
-      setShips(data.data);
-      console.table(data.data);
-    }).catch(e => 
-      console.log(e)
-    );
-  }, []);
+  const dispatch = useDispatch();
+
+  const { isLoading, ships, isAdded } = useSelector((state) => state.ships);
+
+  const saveShip = () => {
+    setSubmitted(true);
+    if (ship.name.trim()) {
+      let _ships = [...ships];
+      let _ship = { ...ship };
+      if (ship.id) {
+        const index = findIndexById(ship.id);
+        dispatch(updateShip(ship))
+          .unwrap()
+          .then(
+            () => {
+              setShipDialog(false);
+              setShip(emptyShip);
+              toast.current.show({
+                severity: "success",
+                summary: "Successful",
+                detail: "Ship Updated",
+                life: 3000,
+              });
+            },
+            (e) => showError(e.message)
+          );
+      } else {
+        // Add ship using ship_service
+        const { id, ..._shipWihoutId } = _ship;
+        dispatch(addShip(_shipWihoutId))
+          .unwrap()
+          .then(
+            () => {
+              setShipDialog(false);
+              setShip(emptyShip);
+              toast.current.show({
+                severity: "success",
+                summary: "Successful",
+                detail: "Ship Created",
+                life: 3000,
+              });
+            },
+            (e) => {
+              showError(e.message);
+            }
+          )
+          .catch((e) => console.log(e));
+      }
+    }
+  };
+
+  const deleteShipById = () => {
+    dispatch(deleteShip(ship.id))
+      .unwrap()
+      .then(
+        () => {
+          setDeleteShipDialog(false);
+          setShip(emptyShip);
+          toast.current.show({
+            severity: "success",
+            summary: "Successful",
+            detail: "Ship Deleted",
+            life: 3000,
+          });
+        },
+        (e) => {
+          console.log(e.message);
+        }
+      );
+  };
+
+  const deleteSelectedShips = () => {
+    dispatch(deleteShips(selectedShips))
+      .unwrap()
+      .then(
+        () => {
+          setDeleteShipsDialog(false);
+          setSelectedShips(null);
+          toast.current.show({
+            severity: "success",
+            summary: "Successful",
+            detail: "Ships Deleted",
+            life: 3000,
+          });
+        },
+        (e) => {
+          showError(e.message);
+        }
+      );
+  };
+
+  const showError = (message) => {
+    toast.current.show({
+      severity: "error",
+      summary: "Error Message",
+      detail: message,
+    });
+  };
 
   const openNew = () => {
     setShip(emptyShip);
@@ -100,58 +189,6 @@ const ShipItems = () => {
     setDeleteShipsDialog(false);
   };
 
-  const saveShip = () => {
-    setSubmitted(true);
-
-    if (ship.name.trim()) {
-      let _ships = [...ships];
-      let _ship = { ...ship };
-      if (ship.id) {
-        const index = findIndexById(ship.id);
-
-        ShipService.updateShip(ship)
-          .then((data) => {
-            _ships[index] = _ship;
-
-            toast.current.show({
-              severity: "success",
-              summary: "Successful",
-              detail: "Ship Updated",
-              life: 3000,
-            });
-
-            setShips(_ships);
-            setShipDialog(false);
-            setShip(emptyShip);
-          })
-          .catch((e) => showError("Cannot update this ship informations"));
-      } else {
-        // Add ship using ship_service
-        const { id, ..._shipWihoutId } = _ship;
-        ShipService.addShip(_shipWihoutId)
-          .then((data) => {
-            if (data.data.value != null) {
-              console.log(data.data.value);
-              _ship.id = data.data.value.id;
-              _ships.push(_ship);
-              toast.current.show({
-                severity: "success",
-                summary: "Successful",
-                detail: "Ship Created",
-                life: 3000,
-              });
-              setShips(_ships);
-              setShipDialog(false);
-              setShip(emptyShip);
-            }
-          })
-          .catch((e) => {
-            showError("Ship informations are not valid");
-          });
-      }
-    }
-  };
-
   const editShip = (ship) => {
     setShip({ ...ship });
     setShipDialog(true);
@@ -160,31 +197,6 @@ const ShipItems = () => {
   const confirmDeleteShip = (ship) => {
     setShip(ship);
     setDeleteShipDialog(true);
-  };
-
-  const deleteShip = () => {
-    let _ships = ships.filter((val) => val.id !== ship.id);
-    ShipService.deleteShip(ship.id)
-      .then((data) => {
-        toast.current.show({
-          severity: "success",
-          summary: "Successful",
-          detail: "Ship Deleted",
-          life: 3000,
-        });
-        setShips(_ships);
-        setDeleteShipDialog(false);
-        setShip(emptyShip);
-      })
-      .catch((e) => showError("Cannot delete this instance of ship"));
-  };
-
-  const showError = (message) => {
-    toast.current.show({
-      severity: "error",
-      summary: "Error Message",
-      detail: message,
-    });
   };
 
   // Find the index of the ship by Its Id in the
@@ -240,19 +252,6 @@ const ShipItems = () => {
     );
   };
 
-  const deleteSelectedShips = () => {
-    let _ships = ships.filter((val) => !selectedShips.includes(val));
-    ShipService.deleteShips(selectedShips).then((data) => console.log(data));
-    setShips(_ships);
-    setDeleteShipsDialog(false);
-    setSelectedShips(null);
-    toast.current.show({
-      severity: "success",
-      summary: "Successful",
-      detail: "Ships Deleted",
-      life: 3000,
-    });
-  };
   const header = (
     <div className="table-header">
       <h5 className="mx-0 my-1">Manage Ships</h5>
@@ -294,7 +293,7 @@ const ShipItems = () => {
         label="Yes"
         icon="pi pi-check"
         className="p-button-text"
-        onClick={deleteShip}
+        onClick={deleteShipById}
       />
     </React.Fragment>
   );
@@ -320,7 +319,6 @@ const ShipItems = () => {
       <Toast ref={toast} />
 
       <div className="card">
-        {/* <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar> */}
         <Toolbar className="mb-4 mx-2" left={leftToolbarTemplate}></Toolbar>
 
         <DataTable
