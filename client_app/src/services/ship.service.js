@@ -1,28 +1,28 @@
-import instance from "../configurations/axios.config";
+import apiClient from '../helper/api.client';
 
 export const ShipService = {
     getShips: function() 
     {
-        return instance.get("Ship");
+        return apiClient().get("Ship");
     },
 
     addShip: function(ship) 
     {
-        return instance.post("Ship", ship);
+        return apiClient().post("Ship", ship);
     },
 
     updateShip: function(ship) 
     {
-        return instance.put(`Ship/${ship.id}`, ship)
+        return apiClient().put(`Ship/${ship.id}`, ship)
     },
 
     deleteShip: function(shipId) 
     {
-        return instance.delete(`Ship/${shipId}`)
+        return apiClient().delete(`Ship/${shipId}`)
     },
 
     deleteShips: function(ships)
     {
-        return instance.delete("Ship/deleteShips", {data: ships})
+        return apiClient().delete("Ship/deleteShips", {data: ships})
     }
 }
