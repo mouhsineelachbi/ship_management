@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Immutable;
+using Microsoft.EntityFrameworkCore;
 using ship_management.Models;
 
 namespace ship_management.DB
@@ -11,5 +12,15 @@ namespace ship_management.DB
         }
 
         public DbSet<Ship> ships { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Ship>()
+                .HasIndex(s => s.name)
+                .IsUnique();
+            builder.Entity<Ship>()
+                .HasIndex(s => s.code)
+                .IsUnique();
+        }
     }
 }
