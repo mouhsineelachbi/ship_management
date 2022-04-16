@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text;
+using Microsoft.EntityFrameworkCore;
 using ship_management.DB;
 using ship_management.Interfaces;
 using System.Linq.Expressions;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
 
 namespace ship_management.Repositories
 {
@@ -14,14 +17,35 @@ namespace ship_management.Repositories
         }
         public void Create(T entity)
         {
-            this.ctx.Set<T>().Add(entity);
-            this.ctx.SaveChanges();
+            try
+            {
+                this.ctx.Set<T>().Add(entity);
+                this.ctx.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+               var sb = new StringBuilder();
+                sb.AppendLine($"DbUpdateException error details - {e?.InnerException?.InnerException?.Message}");
+
+                foreach (var eve in e.Entries)
+                {
+                    sb.AppendLine($"Entity of type {eve.Entity.GetType().Name} in state {eve.State} could not be added");
+                }
+
+                throw new DbUpdateException(sb.ToString());
+            }
+            
         }
 
         public void Delete(T entity)
         {
-            this.ctx.Set<T>().Remove(entity);
-            this.ctx.SaveChanges();
+            try{
+                this.ctx.Set<T>().Remove(entity);
+                this.ctx.SaveChanges();
+            }
+            catch(DbUpdateException e){
+                throw new DbUpdateException();
+            }
         }
 
         public IQueryable<T> FindAll()
@@ -36,8 +60,14 @@ namespace ship_management.Repositories
 
         public void Update(T entity)
         {
-            this.ctx.Set<T>().Update(entity);
-            this.ctx.SaveChanges();
+            try
+            {
+                this.ctx.Set<T>().Update(entity);
+                this.ctx.SaveChanges();
+            }
+            catch(DbUpdateException e){
+                throw new DbUpdateException();
+            }
         }
 
         public void DeleteMultiple(T[] entities)
