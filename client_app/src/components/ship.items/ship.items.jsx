@@ -19,11 +19,11 @@ import {
 
 const ShipItems = () => {
   let emptyShip = {
-    id: null,
+    id: 0,
     name: "",
     length: 0,
     width: 0,
-    code: null,
+    code: '',
   };
 
   const leftToolbarTemplate = () => {
@@ -197,8 +197,7 @@ const ShipItems = () => {
     setDeleteShipDialog(true);
   };
 
-  // Find the index of the ship by Its Id in the
-  // ship list
+  // Find the index of the ship by Its Id
   const findIndexById = (id) => {
     let index = -1;
     for (let i = 0; i < ships.length; i++) {
@@ -435,10 +434,11 @@ const ShipItems = () => {
               id="code"
               value={ship.code}
               onChange={(e) => onInputChange(e, "code")}
+              placeholder="AAAA-1111-A1"
               required
               className={classNames({ "p-invalid": submitted && !ship.code })}
             />
-            {/* {submitted && !ship.code && codeInvalid && <small className="p-error">Code field is empty or It's not a valid.</small>}  Submitted event invalid code */}
+            {submitted && !RegExp(shipCodeValidation).test(ship.code) && (<small className="p-error">Code field is empty or It's not a valid.</small>)}
           </div>
         </div>
       </Dialog>
