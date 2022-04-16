@@ -24,13 +24,40 @@ export const findIndexById = (id, ships) => {
 export const addShip = createAsyncThunk("ships/addShip", async (ship) => {
   return await ApiClient()
     .post("Ship", ship)
-    .then((res) => res.data.value);
+    .then((res) => res.data.value)
+    .catch((err) => {
+      let errorMessage;
+      if (err && err.response && err.response.data) {
+        errorMessage = err.response.data;
+      } else {
+        errorMessage = err.message;
+      }
+      const customError = {
+        name: "Custom axios error",
+        message: errorMessage,
+      };
+      throw customError;
+    });
 });
 
 export const updateShip = createAsyncThunk("ships/updateShip", async (ship) => {
   return await ApiClient()
     .put(`Ship/${ship.id}`, ship)
-    .then((res) => res.data);
+    .then((res) => res.data)
+    .catch((err) => {
+      let errorMessage;
+      if (err && err.response && err.response.data) {
+        errorMessage = err.response.data;
+      } else {
+        errorMessage = err.message;
+      }
+
+      const customError = {
+        name: "Custom axios error",
+        message: errorMessage,
+      };
+      throw customError;
+    });
 });
 
 export const deleteShip = createAsyncThunk(
@@ -38,16 +65,43 @@ export const deleteShip = createAsyncThunk(
   async (shipId) => {
     return await ApiClient()
       .delete(`Ship/${shipId}`)
-      .then((res) => res.data);
+      .then((res) => res.data)
+      .catch((err) => {
+        let errorMessage;
+        if (err && err.response && err.response.data) {
+          errorMessage = err.response.data;
+        } else {
+          errorMessage = err.message;
+        }
+        const customError = {
+          name: "Custom axios error",
+          message: errorMessage,
+        };
+        throw customError;
+      });
   }
 );
 
 export const deleteShips = createAsyncThunk(
   "ships/deleteShips",
   async (ships) => {
-    ApiClient()
+    await ApiClient()
       .delete("Ship/deleteShips", { data: ships })
-      .then((res) => res);
+      .then((res) => res)
+      .catch((err) => {
+        let errorMessage;
+        if (err && err.response && err.response.data) {
+          errorMessage = err.response.data;
+        } else {
+          errorMessage = err.message;
+        }
+        const customError = {
+          name: "Custom axios error",
+          message: errorMessage,
+        };
+        console.log(errorMessage);
+        throw customError;
+      });
   }
 );
 
@@ -94,6 +148,7 @@ const shipsSlice = createSlice({
     },
     [updateShip.rejected]: (state, action) => {
       state.errorMessage = action.error.message;
+      state.isLoading = false;
     },
     [deleteShip.pending]: (state, action) => {
       state.isLoading = true;
@@ -108,16 +163,15 @@ const shipsSlice = createSlice({
     },
     [deleteShips.pending]: (state, action) => {
       state.isLoading = true;
-      console.log(action)
     },
     [deleteShips.fulfilled]: (state, action) => {
-      let selectedShips = action.meta.arg
+      let selectedShips = action.meta.arg;
       state.ships = state.ships.filter((val) => !selectedShips.includes(val));
       state.isLoading = false;
     },
     [deleteShips.rejected]: (state, action) => {
-      
-    }
+      state.isLoading = false;
+    },
   },
 });
 
