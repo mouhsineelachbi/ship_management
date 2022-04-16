@@ -47,7 +47,13 @@ namespace ship_management.Controllers
             {
                 return BadRequest("Invalid Ship object");
             }
-            _shipRepository.CreateShip(ship);
+            try {
+                _shipRepository.CreateShip(ship);
+            }
+            catch(Exception e){
+                return BadRequest("Duplicate ship name or code");
+            }
+
             return Ok(CreatedAtAction("id", new { id = ship.id }, ship));
         }
 
@@ -68,7 +74,13 @@ namespace ship_management.Controllers
             {
                 return NotFound();
             }
-            _shipRepository.UpdateShip(ship);
+            try
+            {
+                _shipRepository.UpdateShip(ship);
+            }
+            catch(Exception e){
+                return BadRequest("Name or Code already existed");
+            }
             return NoContent();
         }
         
@@ -82,7 +94,13 @@ namespace ship_management.Controllers
             {
                 return NotFound();
             }
+            try{
             _shipRepository.DeleteShip(dbShip);
+            }
+            catch(Exception e)
+            {
+                return BadRequest("Cannot delete this ship");
+            }
             return NoContent();
         }
 
