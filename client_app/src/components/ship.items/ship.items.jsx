@@ -135,7 +135,8 @@ const ShipItems = () => {
           });
         },
         (e) => {
-          console.log(e.message);
+          setDeleteShipDialog(false);
+          showError(e.message);
         }
       );
   };
@@ -157,7 +158,8 @@ const ShipItems = () => {
         (e) => {
           showError(e.message);
         }
-      );
+      )
+      .catch(e => showError(e.message));
   };
 
   const showError = (message) => {
@@ -453,7 +455,7 @@ const ShipItems = () => {
       >
         <div className="confirmation-content">
           <i
-            className="pi pi-exclamation-triangle mr-3"
+            className="pi pi-exclamation-triangle mx-3 pt-2"
             style={{ fontSize: "2rem" }}
           />
           {ship && (
