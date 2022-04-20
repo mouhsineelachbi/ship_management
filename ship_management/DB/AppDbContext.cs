@@ -12,6 +12,7 @@ namespace ship_management.DB
         }
 
         public DbSet<Ship> ships { get; set; }
+        public DbSet<User> users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
