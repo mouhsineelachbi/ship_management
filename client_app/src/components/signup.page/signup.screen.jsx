@@ -1,13 +1,13 @@
 import React from "react";
-import "./signin.screen.css";
+import "./signup.screen.css";
 
-export default function Signin() {
+export default function Signup() {
   return (
-    <div className="col-12 d-flex h-100">
-      <main className="form-signin">
+    <div className="col-12 d-flex h-50">
+      <main className="form-signup">
         <form>
           <div className="form-title text-center">
-            <h1 className="h3 mb-4 fw-normal">Sign in</h1>
+            <h1 className="h3 mb-4 fw-normal">Sign up</h1>
           </div>
 
           <div className="form-floating">
@@ -28,14 +28,8 @@ export default function Signin() {
             />
             <label htmlFor="floatingPassword">Password</label>
           </div>
-
-          <div className="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me" /> Remember me
-            </label>
-          </div>
           <button className="w-100 btn btn-lg btn-primary" type="submit">
-            Sign in
+            Sign up
           </button>
         </form>
       </main>
