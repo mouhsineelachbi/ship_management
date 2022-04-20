@@ -29,7 +29,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data s
 // Register Ship Repository
 builder.Services.AddScoped<IShipRepository, ShipRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
+builder.Services.AddScoped<IJwtService,JwtService>();
 
 // Add services to the container.
 builder.Services.AddControllers();
