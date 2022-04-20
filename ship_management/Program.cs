@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ship_management.DB;
 using ship_management.Interfaces;
 using ship_management.Repositories;
+using ship_management.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,13 +11,15 @@ var  AllowedSpecificOrigins = "_shipAllowPolicy";
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: AllowedSpecificOrigins,
-                      policy  =>
-                      {
-                          policy.WithOrigins("http://localhost:3000").AllowAnyHeader()
+    options.AddPolicy(
+        name: AllowedSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
-                      });
+        });
 });
 
 
@@ -25,6 +28,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite("Data s
 
 // Register Ship Repository
 builder.Services.AddScoped<IShipRepository, ShipRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 
 // Add services to the container.
 builder.Services.AddControllers();
