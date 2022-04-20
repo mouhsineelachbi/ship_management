@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  server:
+    build: ./ship_management
+    container_name: server_c
+    ports:
+      - '8080:80'

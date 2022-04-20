@@ -1,20 +1,10 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine as build
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
-
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["ship_management/ship_management.csproj", "ship_management/"]
-RUN dotnet restore "ship_management/ship_management.csproj"
 COPY . .
-WORKDIR "/src/ship_management"
-RUN dotnet build "ship_management.csproj" -c Release -o /app/build
+RUN dotnet restore
+RUN dotnet publish -o /app/published-app
 
-FROM build AS publish
-RUN dotnet publish "ship_management.csproj" -c Release -o /app/publish
-
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine as runtime
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ship_management.dll"]
+COPY --from=build /app/published-app /app
+ENTRYPOINT [ "dotnet", "/app/ship_management.dll" ]
