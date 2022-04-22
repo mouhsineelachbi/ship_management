@@ -4,4 +4,9 @@ services:
     build: ./ship_management
     container_name: server_c
     ports:
-      - '8080:80'
+      - '4000:80'
+  client:
+    build: ./client_app
+    container_name: client_c
+    ports:
+      - '3000:3000'
