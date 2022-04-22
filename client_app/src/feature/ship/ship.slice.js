@@ -87,7 +87,7 @@ export const deleteShips = createAsyncThunk(
   async (ships) => {
     await ApiClient()
       .delete("Ship/deleteShips", { data: ships })
-      .then((res) => res)
+      .then((res) => res.data)
       .catch((err) => {
         let errorMessage;
         if (err && err.response && err.response.data) {
