@@ -10,6 +10,7 @@ import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import "./ship.items.css";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   addShip,
   updateShip,
@@ -44,8 +45,6 @@ const ShipItems = () => {
       </React.Fragment>
     );
   };
-
-  const [shipss, setShipss] = useState(null);
 
   const [shipDialog, setShipDialog] = useState(false);
 
@@ -141,13 +140,17 @@ const ShipItems = () => {
       );
   };
 
+  const navigate = useNavigate();
+
   const deleteSelectedShips = () => {
     dispatch(deleteShips(selectedShips))
       .unwrap()
       .then(
         () => {
+          navigate(0)
           setDeleteShipsDialog(false);
           setSelectedShips(null);
+          // navigate(0)
           toast.current.show({
             severity: "success",
             summary: "Successful",
@@ -237,16 +240,18 @@ const ShipItems = () => {
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
+        <div class="row">
         <Button
           icon="pi pi-pencil"
-          className="p-button-rounded p-button-success mx-2"
+          className="p-button-rounded p-button-success mx-2 col-1"
           onClick={() => editShip(rowData)}
         />
         <Button
           icon="pi pi-trash"
-          className="p-button-rounded p-button-warning"
+          className="p-button-rounded p-button-warning col-1"
           onClick={() => confirmDeleteShip(rowData)}
         />
+        </div>
       </React.Fragment>
     );
   };
