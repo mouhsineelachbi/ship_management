@@ -54,4 +54,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run("http://localhost:4000");
+app.Run();
