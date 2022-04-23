@@ -27,13 +27,28 @@ namespace ship_management.Controllers
         [HttpPost("Register")]
         public IActionResult Register(RegisterDto dto)
         {
+            if(dto == null)
+            {
+                return BadRequest("Ship object is null");
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid user object");
+            }
             User user = new User
             {
                 Username = dto.Username,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password)
             };
-            UserRepository.Create(user);
-            return Ok(CreatedAtAction("id", new { id = user.id }, user));
+            try
+            {
+                UserRepository.Create(user);
+                return Ok(CreatedAtAction("id", new { id = user.id }, user));
+            }
+            catch(Exception e)
+            {
+                return BadRequest("Duplicate user username");
+            }
         }
 
 

@@ -22,6 +22,9 @@ namespace ship_management.DB
             builder.Entity<Ship>()
                 .HasIndex(s => s.code)
                 .IsUnique();
+            builder.Entity<User>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
         }
     }
 }
