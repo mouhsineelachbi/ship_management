@@ -240,7 +240,7 @@ const ShipItems = () => {
   const actionBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
-        <div class="row">
+        <div className="row">
         <Button
           icon="pi pi-pencil"
           className="p-button-rounded p-button-success mx-2 col-1"
