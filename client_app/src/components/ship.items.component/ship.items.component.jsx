@@ -8,7 +8,7 @@ import { Toolbar } from "primereact/toolbar";
 import { InputNumber } from "primereact/inputnumber";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
-import "./ship.items.css";
+import "./ship.items.component.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
