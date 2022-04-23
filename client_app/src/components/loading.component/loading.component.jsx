@@ -1,6 +1,6 @@
 import React from "react";
 import ReactLoading from "react-loading";
-import "./loading.screen.css";
+import "./loading.component.css";
 
 export default function Loading() {
   return (
