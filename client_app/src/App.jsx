@@ -4,7 +4,7 @@ import "./App.css";
 import ErrorPage from "./components/error.page/error.page";
 import Loading from "./components/loading.page/loading.screen";
 import Navbar from "./components/navbar.component/navbar.component";
-import Signup from "./components/signup.page/signup.screen";
+import Signup from "./components/signup.component/signup.component";
 import { getAllShips } from "./feature/ship/ship.slice";
 import Login from "./components/login.component/login.component";
 import { BrowserRouter, Routes, Route } from "react-router-dom";

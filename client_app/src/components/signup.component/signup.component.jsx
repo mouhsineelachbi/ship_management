@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../feature/auth/auth.slice";
-import "./signup.screen.css";
+import "./signup.component.css";
 
 export default function Signup() {
 
