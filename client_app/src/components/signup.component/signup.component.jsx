@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Toast } from 'primereact/toast';
 import { addUser } from "../../feature/auth/auth.slice";
 import "./signup.component.css";
+import { useRef } from "react";
 
 export default function Signup() {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const toast = useRef("null");
 
   const dispatch = useDispatch();
 
@@ -14,8 +17,11 @@ export default function Signup() {
     e.preventDefault();
     const user = {Username: username, Password: password}
     dispatch(addUser(user))
-    .then()
-    .catch()
+    .unwrap()
+    .then(
+      ()=>{},
+      (e)=>{toast.current.show({severity: 'error', summary: 'Sign up error', detail: e.message});}
+    )
   }
 
   return (
@@ -25,7 +31,7 @@ export default function Signup() {
           <div className="form-title text-center">
             <h1 className="h3 mb-4 fw-normal">Sign up</h1>
           </div>
-
+          <Toast ref={toast} />
           <div className="form-floating">
             <input
               type="text"
