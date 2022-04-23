@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
-import ErrorPage from "./components/error.page/error.page";
+import ErrorPage from "./components/error.component/error.component";
 import Loading from "./components/loading.component/loading.component";
 import Navbar from "./components/navbar.component/navbar.component";
 import Signup from "./components/signup.component/signup.component";
