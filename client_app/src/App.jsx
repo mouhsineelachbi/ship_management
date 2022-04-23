@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import ErrorPage from "./components/error.page/error.page";
 import Loading from "./components/loading.page/loading.screen";
-import Navbar from "./components/navbar/navbar.screen";
+import Navbar from "./components/navbar.component/navbar.component";
 import ShipItems from "./components/ship.items/ship.items";
 import Signup from "./components/signup.page/signup.screen";
 import { getAllShips } from "./feature/ship/ship.slice";
