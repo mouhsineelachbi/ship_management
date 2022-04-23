@@ -7,7 +7,7 @@ import Navbar from "./navbar.component/navbar.component";
 import Signup from "./signup.component/signup.component";
 import { getAllShips } from "../feature/ship/ship.slice";
 import Login from "./login.component/login.component";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./home.component/home.component";
 function App() {
   const dispatch = useDispatch();
@@ -22,21 +22,17 @@ function App() {
 
   return (
     <div className="App">
-      
       <main>
         <BrowserRouter>
-        <Navbar />
+          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Signup />}></Route>
+            <Route path="/register" element={<Signup />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </BrowserRouter>
       </main>
-
-      {/* {isLoading && <Loading />}
-      {ships && <ShipItems />}
-      { errorMessage && <ErrorPage />} */}
     </div>
   );
 }
