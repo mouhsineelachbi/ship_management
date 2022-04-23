@@ -4,14 +4,15 @@ import { Toast } from 'primereact/toast';
 import { addUser } from "../../feature/auth/auth.slice";
 import "./signup.component.css";
 import { useRef } from "react";
+import {useNavigate} from 'react-router-dom';
 
 export default function Signup() {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const toast = useRef("null");
-
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const register = (e) => {
     e.preventDefault();
@@ -19,7 +20,9 @@ export default function Signup() {
     dispatch(addUser(user))
     .unwrap()
     .then(
-      ()=>{},
+      ()=>{
+        navigate("/")
+      },
       (e)=>{toast.current.show({severity: 'error', summary: 'Sign up error', detail: e.message});}
     )
   }
