@@ -4,7 +4,6 @@ import "./App.css";
 import ErrorPage from "./components/error.page/error.page";
 import Loading from "./components/loading.page/loading.screen";
 import Navbar from "./components/navbar.component/navbar.component";
-import ShipItems from "./components/ship.items/ship.items";
 import Signup from "./components/signup.page/signup.screen";
 import { getAllShips } from "./feature/ship/ship.slice";
 import Login from "./components/login.component/login.component";
@@ -28,7 +27,6 @@ function App() {
         <BrowserRouter>
         <Navbar />
           <Routes>
-            {/* <Route path="/" element={<ShipItems />} /> */}
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Signup />}></Route>

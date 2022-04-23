@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 import { logoutUser } from "../../feature/user/user.slice";
-import './nav.screen.css';
+import './navbar.component.css';
 
 export default function Navbar() {
   const { userLoading, user, error } = useSelector((state) => state.user);
