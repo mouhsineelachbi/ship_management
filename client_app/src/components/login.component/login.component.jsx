@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../feature/auth/auth.slice";
 import { useNavigate } from "react-router-dom";
 import { Toast } from "primereact/toast";
+import Loading from "../loading.component/loading.component";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -10,6 +11,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toast = useRef(null);
+  const { isLoading } = useSelector(state => state.auth)
 
   const login = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -60,6 +62,9 @@ export default function Login() {
           <button className="w-100 btn btn-lg btn-primary" type="submit">
             Login
           </button>
+          {isLoading && <div>
+            <Loading></Loading>
+          </div>}
         </form>
       </main>
     </div>
