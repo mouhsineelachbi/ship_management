@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../feature/auth/auth.slice";
 import { useNavigate } from "react-router-dom";
+import { Toast } from "primereact/toast";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const toast = useRef(null);
 
   const login = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -22,7 +24,7 @@ export default function Login() {
           navigate("/")
         },
         (e) => {
-          navigate("/register")
+          toast.current.show({severity: 'error', summary: 'Login error', detail: 'Invalide credentials'});
         }
       );
   };
@@ -34,7 +36,7 @@ export default function Login() {
           <div className="form-title text-center">
             <h1 className="h3 mb-4 fw-normal">Login</h1>
           </div>
-
+          <Toast ref={toast} />
           <div className="form-floating">
             <input
               type="text"
