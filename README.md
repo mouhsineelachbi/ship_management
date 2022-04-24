@@ -52,5 +52,16 @@ Here's some libraries and frameworks that the implementation is built with :
 * [Bootstrap](https://getbootstrap.com)
 * [primereact](https://www.primefaces.org/primereact/)
 
-
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+
+* docker-compose
+* docker
