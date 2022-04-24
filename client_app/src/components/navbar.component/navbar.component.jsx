@@ -6,7 +6,7 @@ import './navbar.component.css';
 import "bootstrap/js/dist/collapse.js";
 
 export default function Navbar() {
-  const { userLoading, user, error } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const logout = () => {
