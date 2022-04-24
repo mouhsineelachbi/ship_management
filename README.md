@@ -74,7 +74,9 @@ To get this project work on your machine you have to have the next software on y
    ```sh
     cd ship_management
    ```
-<img src="images/project_folder.jpg" width="100%"/>
+   <div>
+      <img src="images/project_folder.jpg" width="100%"/>
+   </div>
 3. Run docker-compose up to build images and run containers
    ```sh
    docker-compose up
@@ -91,10 +93,28 @@ To use this solution follow the next instructions :
    http://localhost:3000
    ```
 2. Register using username and password (any kind of username or password)
+  <div>
+      <img src="images/Signup.jpg" width="100%"/>
+   </div>
 3. Login using the username and passowrd
+  <div>
+      <img src="images/login.jpg" width="100%"/>
+   </div>
 4. Create ship with ship name code long and width
+  <div>
+      <img src="images/add_ship.jpg" width="100%"/>
+   </div>
+   <div>
+      <img src="images/add_ship_form.jpg" width="100%"/>
+   </div>
 5. Update ship
+  <div>
+      <img src="images/update_ship.jpg" width="100%"/>
+   </div>
 6. Delete Ship
+  <div>
+      <img src="images/delete_ship.jpg" width="100%"/>
+   </div>
 7. Delete multiple ships
 <p align="right">(<a href="#top">back to top</a>)</p>
 
