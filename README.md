@@ -74,7 +74,7 @@ To get this project work on your machine you have to have the next software on y
    ```sh
     cd ship_management
    ```
-   ![Product Name Screen Shot](images/project_folder.png)
+<img src="images/project_folder.jpg" width="128"/>
 3. Run docker-compose up to build images and run containers
    ```sh
    docker-compose up
