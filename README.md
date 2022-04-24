@@ -80,5 +80,39 @@ To get this project work on your machine you have to have the next software on y
    ```sh
    docker-compose up
    ```
+<p align="right">(<a href="#top">back to top</a>)</p>   
+
+   <!-- USAGE EXAMPLES -->
+## Usage
+
+To use this solution follow the next instructions : 
+
+1. Run your browser to access home page after building and running containers is finished
+   ```html
+   http://localhost:3000
+   ```
+2. Register using username and password (any kind of username or password)
+3. Login using the username and passowrd
+4. Adter
+
+
+
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- CONTACT -->
+## Contact
+
+Mouhsine ELACHBI - [@mouhsineelachbi](https://twitter.com/mouhsineelachbi) - mouhsineelachbi@gmail.com
+
+Project Link: [https://github.com/mouhsineelachbi/ship_management](https://github.com/mouhsineelachbi/ship_management)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
