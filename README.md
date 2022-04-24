@@ -29,11 +29,8 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -63,6 +60,7 @@ To get a local copy up and running follow these simple example steps.
 
 To get this project work on your machine you have to have the next software on your local machine :
 
+* git
 * docker-compose
 * docker
 
@@ -80,9 +78,9 @@ To get this project work on your machine you have to have the next software on y
    ```sh
    docker-compose up
    ```
+
 <p align="right">(<a href="#top">back to top</a>)</p>   
 
-   <!-- USAGE EXAMPLES -->
 ## Usage
 
 To use this solution follow the next instructions : 
@@ -93,12 +91,10 @@ To use this solution follow the next instructions :
    ```
 2. Register using username and password (any kind of username or password)
 3. Login using the username and passowrd
-4. Adter
-
-
-
-
-
+4. Create ship with ship name code long and width
+5. Update ship
+6. Delete Ship
+7. Delete multiple ships
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- LICENSE -->
