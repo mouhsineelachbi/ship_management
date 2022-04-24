@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 import { logoutUser } from "../../feature/user/user.slice";
 import './navbar.component.css';
+import "bootstrap/js/dist/collapse.js";
 
 export default function Navbar() {
   const { userLoading, user, error } = useSelector((state) => state.user);
