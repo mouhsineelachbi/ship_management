@@ -49,3 +49,16 @@
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
+
+This project has been created due to a demand to solve some ship management challenge and try to do that management functionalities in an optimistic way by creating rest api using Microsoft .NET 6 and ReactJs U.I library and state manager Redux and Its tools.
+
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
