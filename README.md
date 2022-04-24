@@ -61,7 +61,22 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+To get this project work on your machine you have to have the next software on your local machine :
 
 * docker-compose
 * docker
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/mouhsineelachbi/ship_management
+   ```
+2. Make sure that you are in the project folder 
+   
+3. Run docker-compose up to build images and run containers
+   ```sh
+   docker-compose up
+   ```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
