@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ship_management.Interfaces;
 using ship_management.Models;
-using ship_management.Paging;
 
 namespace ship_management.Controllers
 {

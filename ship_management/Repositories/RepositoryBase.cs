@@ -15,6 +15,9 @@ namespace ship_management.Repositories
         {
             this.ctx = ctx;
         }
+        /*
+            Create an entity into set of the entity in dbContext
+        */
         public void Create(T entity)
         {
             try
@@ -37,6 +40,9 @@ namespace ship_management.Repositories
             
         }
 
+        /*
+            Delete an entity from set of the entity in dbContext
+        */
         public void Delete(T entity)
         {
             try{
@@ -48,16 +54,25 @@ namespace ship_management.Repositories
             }
         }
 
+        /*
+            Find list of data of type T in that set of T entities
+        */
         public IQueryable<T> FindAll()
         {
             return this.ctx.Set<T>().AsNoTracking();
         }
 
+        /*
+            Find an entity by a condition from set of the entity in dbContext
+        */
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
         {
             return this.ctx.Set<T>().Where(expression).AsNoTracking();
         }
 
+        /*
+            Update an entity in the set of the entity in dbContext
+        */
         public void Update(T entity)
         {
             try
@@ -70,6 +85,9 @@ namespace ship_management.Repositories
             }
         }
 
+        /*
+            Delete multiple entities from set of the entity in dbContext
+        */
         public void DeleteMultiple(T[] entities)
         {
             foreach (var entity in entities)

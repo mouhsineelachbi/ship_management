@@ -1,4 +1,4 @@
-﻿namespace ship_management.Paging
+﻿namespace ship_management.Models
 {
     public class PagingParameters
     {
