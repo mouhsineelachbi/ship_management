@@ -1,15 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import ApiClient from "../../helper/api.client";
 
-// export const getUser = createAsyncThunk(
-//   "user/getUser",
-//   async (dispatch, getState) => {
-//     return await ApiClient()
-//       .get("Auth/User")
-//       .then((res) => res.data);
-//   }
-// );
-
 export const getUser = createAsyncThunk("user/getUser", async (dispatch, getState) => {
     return await ApiClient()
       .get("Auth/User")

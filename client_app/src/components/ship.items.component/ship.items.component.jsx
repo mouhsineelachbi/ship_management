@@ -1,22 +1,20 @@
-import React, { useState, useRef } from "react";
-import { classNames } from "primereact/utils";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-import { Toolbar } from "primereact/toolbar";
-import { InputNumber } from "primereact/inputnumber";
+import { Column } from "primereact/column";
+import { DataTable } from "primereact/datatable";
 import { Dialog } from "primereact/dialog";
+import { InputNumber } from "primereact/inputnumber";
 import { InputText } from "primereact/inputtext";
-import "./ship.items.component.css";
+import { Toast } from "primereact/toast";
+import { Toolbar } from "primereact/toolbar";
+import { classNames } from "primereact/utils";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  addShip,
-  updateShip,
-  deleteShip,
-  deleteShips,
+  addShip, deleteShip,
+  deleteShips, updateShip
 } from "../../feature/ship/ship.slice";
+import "./ship.items.component.css";
 
 const ShipItems = () => {
   let emptyShip = {

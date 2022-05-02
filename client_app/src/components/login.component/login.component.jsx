@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../feature/auth/auth.slice";
-import { useNavigate } from "react-router-dom";
 import { Toast } from "primereact/toast";
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../feature/auth/auth.slice";
 import Loading from "../loading.component/loading.component";
 
 export default function Login() {
